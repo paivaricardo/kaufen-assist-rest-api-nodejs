@@ -34,6 +34,10 @@ module.exports = (sequelize, DataTypes) => {
           key: 'id_compra'
         }
       },
+      qtd_compra: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
     },
     { freezeTableName: true, timestamps: false }
   );

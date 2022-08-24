@@ -9,7 +9,8 @@ const createCompraProduto = async (req, res) => {
 
   let novaCompraProduto = {
     id_produto: req.body.id_produto,
-    id_compra: req.body.id_compra
+    id_compra: req.body.id_compra,
+    qtd_compra: req.body.qtd_compra
   };
 
   const compraProdutoCriada = await CompraProduto.create(novaCompraProduto);

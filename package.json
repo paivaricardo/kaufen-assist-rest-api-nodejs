@@ -1,7 +1,7 @@
 {
-  "name": "node_express_api_sequelize_tutorial",
+  "name": "sistema_kaufen_assist_rest_api",
   "version": "1.0.0",
-  "description": "node express crud api with sequelize",
+  "description": "REST API em Node.js, com banco de dados MySQL e ORM Sequelize, para o sistema Kaufen Assist",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

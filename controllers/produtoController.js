@@ -6,13 +6,13 @@ const Produto = db.produtos;
 // Tarefas principais do CRUD de produtos
 // CREATE Produto
 const createProduto = async (req, res) => {
-
   let novoProduto = {
     nome: req.body.nome,
     descricao: req.body.descricao,
     preco: req.body.preco,
     data_criacao: req.body.data_criacao,
     data_atualizacao: req.body.data_atualizacao,
+    ic_ativo: req.body.ic_ativo,
   };
 
   console.log(novoProduto);
@@ -23,7 +23,9 @@ const createProduto = async (req, res) => {
 
 // READ ALL Produto
 const readAllProduto = async (req, res) => {
-  let produtos = await Produto.findAll({});
+  // A requisição GET para todos os produtos somente buscará os produtos ativos. Produtos inativos não aparecerão dos resultados
+
+  let produtos = await Produto.findAll({ where: { ic_ativo: true } });
   res.status(200).send(produtos);
 };
 
@@ -40,16 +42,25 @@ const updateProduto = async (req, res) => {
 
   const produto = await Produto.update(req.body, { where: { id_produto: id } });
 
-  res.status(200).send({message: `Produto de id ${id} foi atualizado com sucesso.`});
+  res
+    .status(200)
+    .send({ message: `Produto de id ${id} foi atualizado com sucesso.` });
 };
 
 // DELETE Produto
 const deleteProduto = async (req, res) => {
   let id = req.params.id;
 
-  await Produto.destroy({ where: { id_produto: id } });
+  // Como é necessário manter um histórico dos produtos já comprados, até para manter a consistência do registro de compras passadas, a requisição DELETE vai apenas inativar o produto, não excluí-lo da base de dados.
 
-  res.status(200).send({message: `Produto de id ${id} foi deletado.`});
+  // await Produto.destroy({ where: { id_produto: id } });
+
+  const produto = await Produto.update(
+    { ic_ativo: false },
+    { where: { id_produto: id } }
+  );
+
+  res.status(200).send({ message: `Produto de id ${id} foi desativado.` });
 };
 
 module.exports = {

@@ -41,6 +41,7 @@ module.exports = (sequelize, DataTypes) => {
       id_compra: {
         type: DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement: true
       },
       total: {
         type: DataTypes.DECIMAL(8,2),
@@ -48,7 +49,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       data_criacao: {
         type: DataTypes.DATE,
-        allowNull: false,
       },
       id_tipo_pagamento: {
         type: DataTypes.INTEGER,

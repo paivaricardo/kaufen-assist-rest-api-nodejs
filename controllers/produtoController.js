@@ -6,18 +6,22 @@ const Produto = db.produtos;
 // Tarefas principais do CRUD de produtos
 // CREATE Produto
 const createProduto = async (req, res) => {
+  let requisitionBody = req.body;
+
+  console.log(requisitionBody);
+
   let novoProduto = {
-    nome: req.body.nome,
-    descricao: req.body.descricao,
-    preco: req.body.preco,
-    data_criacao: req.body.data_criacao,
-    data_atualizacao: req.body.data_atualizacao,
-    ic_ativo: req.body.ic_ativo,
+    nome: requisitionBody.nome,
+    descricao: requisitionBody.descricao,
+    preco: requisitionBody.preco,
+    // data_criacao: req.body.data_criacao,
+    // data_atualizacao: req.body.data_atualizacao,
+    // ic_ativo: req.body.ic_ativo,
   };
+  
+  console.log(requisitionBody);
 
-  console.log(novoProduto);
-
-  const produto = await Produto.create(novoProduto);
+  const produto = await Produto.create(novoProduto).catch(err => res.status(500).send({message: `Houve um erro ao tentar registrar novo produto.`}));
   res.status(200).send(produto);
 };
 

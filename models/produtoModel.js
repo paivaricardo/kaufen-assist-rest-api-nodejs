@@ -32,15 +32,12 @@ module.exports = (sequelize, DataTypes) => {
       },
       data_criacao: {
         type: DataTypes.DATE,
-        allowNull: false,
       },
       data_atualizacao: {
         type: DataTypes.DATE,
-        allowNull: false,
       },
       ic_ativo: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
         defaultValue: true
       },
     },

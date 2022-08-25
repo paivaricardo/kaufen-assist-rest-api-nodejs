@@ -22,13 +22,12 @@ const createCompra = async (req, res) => {
 
   let novaCompra = {
     total: req.body.total,
-    data_criacao: req.body.data_criacao,
     id_tipo_pagamento: req.body.id_tipo_pagamento,
     id_status_compra: req.body.id_status_compra
   };
 
-  const compra = await Compra.create(novaCompra);
-  res.status(200).send(compra);
+  const compraCriada = await Compra.create(novaCompra);
+  res.status(200).send(compraCriada);
 };
 
 // READ ALL Compra
